@@ -248,6 +248,12 @@ Das ist die Ansteck-Sperrzeit (60 Sekunden). In dieser Zeit wird der Ladestrom a
 3. HA neu starten
 
 ---
+## Unterstütze dieses Projekt ☕
+
+Dir hat dieses Skript geholfen, deine Hausbatterie geschont und du möchtest mir einen Kaffee oder ein alkoholfreies Radler ausgeben? Ich freue mich riesig über jede kleine Wertschätzung!
+
+[![Spenden mit PayPal](https://img.shields.shields.shields.shields.shields.shields.shields.io/badge/Spenden-PayPal-blue.svg)](https://paypal.me/realMundi)
+
 
 ## Lizenz
 
