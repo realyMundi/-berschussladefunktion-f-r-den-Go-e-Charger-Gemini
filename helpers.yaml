@@ -1,0 +1,50 @@
+# ══════════════════════════════════════════════════════════════════
+# Home Assistant Helfer für go-e Überschussladen
+# Datei: /config/helpers.yaml  (oder direkt in configuration.yaml)
+#
+# Diese Helfer werden vom Skript claude_smart_charge.py verwendet.
+# Entitäts-IDs müssen exakt mit den HELPER_*-Konstanten im Skript übereinstimmen.
+#
+# EINBINDEN in configuration.yaml (falls separate Datei):
+#   input_select: !include helpers.yaml    <- nur den input_select-Block
+#   input_number: !include helpers.yaml    <- nur den input_number-Block
+#
+# Einfacher: Alles direkt in configuration.yaml einfügen (siehe README).
+# ══════════════════════════════════════════════════════════════════
+
+# ── Fahrzeugauswahl ───────────────────────────────────────────────
+# Entitäts-ID: input_select.wallbox_fahrzeug
+# Verwendet in: HELPER_FAHRZEUG
+# Zweck: Wählt das Fahrzeugprofil (Mindeststrom mca, Phasenschwelle).
+#
+# WICHTIG: Optionsnamen müssen EXAKT mit den Schlüsseln in
+#          FAHRZEUG_PROFILE im Python-Skript übereinstimmen.
+#          Groß-/Kleinschreibung beachten!
+input_select:
+  wallbox_fahrzeug:
+    name: "Wallbox Fahrzeug"
+    options:
+      - "MG4"       # mca=6A, schwelle_3p=-3800W
+      - "Twingo"    # mca=8A, schwelle_3p=-4000W
+      # Weitere Fahrzeuge hier eintragen UND im Python-Skript ergänzen:
+      # - "MeinAuto"  # dann im Skript: "MeinAuto": {"mca": X, "schwelle_3p": -YYYYW}
+    initial: "MG4"
+    icon: mdi:car-electric
+
+# ── Zielwert Netz (pgt) ───────────────────────────────────────────
+# Entitäts-ID: input_number.wallbox_zielwert_netz
+# Verwendet in: HELPER_ZIELWERT
+# Zweck: Steuert wie viel Puffer der go-e zur Netzeinspeisung hält.
+#        -200W = go-e lädt erst wenn 200W Überschuss vorhanden.
+#        Kleinere Werte (z.B. -50W) = aggressiver laden.
+#        Größere Werte (z.B. -500W) = konservativer, weniger Netzbezug-Risiko.
+input_number:
+  wallbox_zielwert_netz:
+    name: "Wallbox Zielwert Netz"
+    min: -500
+    max: -50
+    step: 50
+    initial: -200
+    unit_of_measurement: "W"
+    icon: mdi:transmission-tower
+    mode: slider
